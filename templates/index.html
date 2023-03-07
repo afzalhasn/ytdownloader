@@ -1,39 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>YouTube Video Downloader</title>
-</head>
-<body>
-    <h1>YouTube Video Downloader</h1>
-    {% if error %}
-    <p style="color: red">{{ error }}</p>
-    {% endif %}
-    <form method="post" action="/">
-        <label for="url">YouTube Link:</label>
-        <input type="text" id="url" name="url"><br><br>
-        <label for="output_path">Download Location:</label>
-        <input type="text" id="output_path" name="output_path" readonly>
-        <button type="button" onclick="selectDirectory()">Select Directory</button><br><br>
+  <head>
+    <title>YouTube Downloader</title>
+    <style>
+      body {
+        background-image: url("https://images.pexels.com/photos/1279813/pexels-photo-1279813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+        background-size: cover;
+      }
+
+      #container {
+        margin: 0 auto;
+        padding-top: 50px;
+        width: 80%;
+        text-align: center;
+        color: white;
+      }
+
+      input[type="text"] {
+        width: 50%;
+        height: 30px;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        width: 30%;
+        height: 40px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>YouTube Downloader</h1>
+      <form action="/download" method="post">
+        <label for="url">Enter YouTube URL:</label><br>
+        <input type="text" id="url" name="url"><br>
+        <label for="output_path">Enter Output Path:</label><br>
+        <input type="text" id="output_path" name="output_path"><br>
         <input type="submit" value="Download">
-    </form>
-    <script>
-        function selectDirectory() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.setAttribute('webkitdirectory', '');
-            input.setAttribute('directory', '');
-            input.setAttribute('mozdirectory', '');
-            input.setAttribute('msdirectory', '');
-            input.setAttribute('odirectory', '');
-            input.setAttribute('multiple', '');
-
-            input.addEventListener('change', function() {
-                const output_path = document.getElementById('output_path');
-                output_path.value = input.files[0].webkitRelativePath.split('/').slice(0, -1).join('/');
-            });
-
-            input.click();
-        }
-    </script>
-</body>
+      </form>
+    </div>
+  </body>
 </html>
